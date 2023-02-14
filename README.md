@@ -33,30 +33,22 @@ segment .bss
 
 section .text
     global _start
-
-
-
-
     
-
-RC4_KSA:    ;Key-scheduling Algorithm: giai doan hoan vi
-
-RC4_PRGA:   ;Pseudo-Random Generation Algorithm
-
-
 _start:
     push    ebp                                     ;save ebp
 	mov     ebp,esp                                 ;set ebp to esp
-	sub     esp,68                                  ;set 68 bytes for local variables
+	sub     esp,                                  ;set  bytes for local variables
     
     write_string    msg1,lenmsg1
     write_string    msg2,12
+    lea             ebx,[ebp - 1027]	;input          
+    read_string     ebx,1024
+    
     mov     byte [ebp-1],0  ;x
     mov     byte [ebp-2],0  ;y
     mov     byte [ebp-3],0  ;j
-    lea             ebx,[ebp - 1027]              
-	read_string     ebx,1024
-    lea             ebx,[ebp - 1283] 
+    
+    lea             ebx,[ebp - 1283] ;box
     RC4_Initialization:     ;giai doan khoi tao
         xor ecx,ecx
         Loop_Init:
@@ -66,13 +58,30 @@ _start:
             jne     Loop_Init
     RC4_KSA:    ;Key-scheduling Algorithm: giai doan hoan vi
         xor ecx,ecx
+	Loop_KSA:
+	    mov     ecx,byte [ebp+ecx-1283]
+	    
+	    
+    RC4_PRGA:   ;Pseudo-Random Generation Algorithm
+	
 
 
 
 
 
 ```
-    
+main: rc4
+
+=> trong rc4 có 2 hàm là KSA và PRGA
+
+=> trong KSA có strlen(key), khởi tạo S box, loop => swap
+
+=> trong PRGA có loop: strlen(plaintext), swap, xor ra ciphertext
+
+=> Có các hàm sau: RC4, KSA, Strlen, loop tạo S, swap, loop tạo swap, PRGA, loop tạo ciphertext và hàm convert ciphertext to hex
+
 https://github.com/3ud4jm0nj4/KCSCTrain/blob/main/w1/RC4EncAsm/code/RC4Enc.asm
 
 https://github.com/Ajomix/NASM-MASM/blob/main/RC4.asm
+
+https://gist.github.com/rverton/a44fc8ca67ab9ec32089
