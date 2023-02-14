@@ -73,3 +73,6 @@ _start:
 
 ```
     
+https://github.com/3ud4jm0nj4/KCSCTrain/blob/main/w1/RC4EncAsm/code/RC4Enc.asm
+
+https://github.com/Ajomix/NASM-MASM/blob/main/RC4.asm
