@@ -55,7 +55,7 @@ _start:
     
     strlen_key:
         mov byte [ebp-1025],0   ;len of key
-		Loop_strlen_key:
+	Loop_strlen_key:
             movzx       ecx,byte [ebp-1025]         ;i
             movzx       eax,byte [ebp+ecx-1024]     ;key[i]
             cmp         eax,0xA                     ;compare it with '\n' to count i
@@ -112,7 +112,7 @@ _start:
 
     strlen_plaintext:
         mov byte [ebp-2308],0   ;len of plaintext
-		Loop_strlen_plaintext:
+	Loop_strlen_plaintext:
             movzx       ecx,byte [ebp-2308]         ;i
             movzx       eax,byte [ebp+ecx-2307]     ;plaintext[i]
             cmp         eax,0xA                     ;compare it with '\n' to count i
