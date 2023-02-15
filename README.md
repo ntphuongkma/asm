@@ -1,3 +1,25 @@
+# RC4
+
+Chall: Code thuật toán mã hóa RC4
+
+Điều kiện: Assembly 32 bit, window hoặc linux
+
+Yêu cầu: 
+
+Chạy được
+
+input nhập vào là chữ hoặc số hoặc mật khẩu muốn encrypt
+
+Kết quả in ra theo dạng hex
+
+Giải thích code rõ ràng
+
+# Run
+
+![rc4](./rc4.jpg)
+
+# Code
+
 ```
 ;a macro with two parameters
 ;implements the write system call
