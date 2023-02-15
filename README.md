@@ -1,4 +1,4 @@
-# RC4
+# RC4 Encryption Algorithm
 
 Chall: Code thuật toán mã hóa RC4
 
