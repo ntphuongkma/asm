@@ -88,7 +88,7 @@ int check_key(char *key) {
 
 --> giá trị trả về của ```sthIdontknow``` chính bằng giá trị của từng phần tử trong mảng ```mySth```
 
-mà hàm ```sthIdontknow``` so sánh từng ký tự của ``sth``` với input ta nhập vào, nếu equal --> return input đúng 
+mà hàm ```sthIdontknow``` so sánh từng ký tự của ```sth``` với input ta nhập vào, nếu equal --> return input đúng 
 
 # Script
 ```
