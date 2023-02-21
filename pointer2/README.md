@@ -102,13 +102,13 @@ char1 = []
 char2 = []
 char3 = []
 char4 = []
-for i in str(key[0:8]):     #3
+for i in key[0:8]:     #3
     char1.append(i)
-for i in str(key[8:16]):    #1
+for i in key[8:16]:    #1
     char2.append(i)
-for i in str(key[16:24]):   #4
+for i in key[16:24]:   #4
     char3.append(i)
-for i in str(key[24:32]):   #2
+for i in key[24:32]:   #2
     char4.append(i)
 print(char2,char4,char1,char3)
 ```
