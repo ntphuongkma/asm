@@ -65,7 +65,7 @@ argc is the count of arguments, and argv is an array of the strings.
 
 ```if (!strncmp(*(argv + 1) + 20, "9c11cc30e5c7", 12))``` --> 12 ký tự còn lại là ```9c11cc30e5c7```
 
---> ```key đầy đủ: 302753d5b52596eb75b89c11cc30e5c7```
+--> key đầy đủ: ```302753d5b52596eb75b89c11cc30e5c7```
 
 Hàm convert
 ```
@@ -93,7 +93,7 @@ int fuzz(char *key) {
 ```
 --> Để tìm ra flag của bài này, ta chỉ việc sắp xếp lại
 
-Reverse bằng tay hoặc dùng script sau đó replace
+Reverse chay hoặc dùng script sau đó replace
 
 # Script
 ```
