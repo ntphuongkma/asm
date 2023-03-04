@@ -98,12 +98,13 @@ int __cdecl sub_E510C0(int a1, unsigned int a2)
 Đây là kỹ thuật int 3. Câu lệnh int 3 lệnh này là lệnh ngắt để dừng chương trình lại tại điểm các bạn muốn. Tức là khi mình sử dụng trình debugger, 
 mỗi khi mình set breakpoint thì opcode 0xCC sẽ được set tại vị trí đó.
 
-=> Vậy để chống chúng ta debug được thì tác giả sẽ tạo hàm để kiểm tra chương trình của chúng ta có chỗ nào đó opcode đã bị biến đổi thành 0xCC hay không, 
-bằng hàm sub_E510C0
+--> Tuy nhiên ở bài này, sau khi check Hex View thì mình phát hiện xh opcode 0xCC được set mặc dù không set bp
 
-=> Để bypass qua kỹ thuật này ta set 0x13 thành 0x37
+![3](./3.jpg)
 
-=> ```v7 = 0x37^0xDEADBEEF = 0xdeadbed8```
+=> Chương trình luôn set giá trị trả về của hàm sub_E510C0 là 0x13
+
+=> ```v7 = 0x13^0xDEADBEEF = 0xdeadbefc```
 
 ### Hàm sub_E51120
 ```
@@ -160,42 +161,19 @@ Tại đây ta lại thấy xuất hiện 2 hàm đặc biệt
 v5 = sub_E51080((unsigned __int8 *)sub_E51120);
 result = *a3 + sub_E510C0((int)sub_E51120, v5); //a3 = v7
 ```
-Phân tích tương tự như trên, ta được hàm sub_E510C0 trả về giá trị 0x37
+Phân tích tương tự như trên, ở đây tác giả đã sử dụng kỹ thuật int3
 
---> Khi đó ```result = v7 + 0x37 = 0xdeadbed8 + 0x37 = 0xdeadbf0f```
+=> Vậy để chống chúng ta debug được thì tác giả sẽ tạo hàm để kiểm tra chương trình của chúng ta có chỗ nào đó opcode đã bị biến đổi thành 0xCC hay không, 
+bằng hàm sub_E510C0
 
---> Sau khi tính toán sẽ xor lưu giá trị vào v9. Cuối cùng check từng ký tự của v9 với v11
-### Script 
-```
-key = [125,8,237,71,229,0,136,58,122,54,2,41,228,0]
-a3 = [0x0F, 0xBF, 0xAD, 0xDE] 
-v7 = [0]*512
-input = []
-for i in range(0,256):
-    v7[i + 256] = i
-    v7[i] = a3[i % 4]
-    result = i + 1
- 
-v13 = 0
-for j in range(0,256):
-    v13 = (v7[j] + v13 + v7[j+256])%256
-    v14 = v7[v13 + 256]
-    v7[v13 + 256] = v7[j + 256]
-    v7[j + 256] = v14
-    result = j + 1
-   
-v13 = 0
-v10 = 0
-for k in range(0,13):
-    v10 = (v10 + 1)%256
-    v13 = (v13 + v7[v10 + 256]) % 256
-    v14 = v7[v13 + 256]
-    v7[v13 + 256] = v7[v10 + 256]
-    v7[v10 + 256] = v14
-    v8 = (v7[v13 + 256] + v7[v10 + 256]) % 256
-    input.append(v7[v8 + 256] ^ key[k])
-    
-for i in input:
-    print(chr(i), end ="")    
-```
+=> Để bypass qua kỹ thuật này ta set 0x13 thành 0x37
 
+--> Ta được hàm sub_E510C0 trả về giá trị 0x37
+
+--> Khi đó ```result = v7 + 0x37 = 0xdeadbefc + 0x37 = 0xdeadbf33```
+
+--> Sau khi chương trình sử dụng thuật toán RC4 encrypt input nhập vào với key (result) ở trên
+
+Có ciphertext chính là v11, mình sử dụng Cyberchef tìm được flag
+
+![4](./4.jpg)
