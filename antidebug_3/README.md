@@ -7,7 +7,7 @@ Ném file vào ida và phân tích
 
 Tại hàm main mình nhận thấy chương trình gọi tới hàm SetUnhandledExceptionFilter
 
-Hàm này nhận đầu vào là một function xử lý lúc nhận được exception. Tức là khi chương trình khi không chạy bằng trình debugger, chương trình sẽ theo flow TopLevelExceptionFilter còn nếu chương trình đang bị debug thì sẽ theo flow bên dưới (bắt đầu từ địa chỉ 0x00401046).
+Hàm này nhận đầu vào là một function xử lý lúc nhận được exception. Tức là khi chương trình khi không chạy bằng trình debugger, chương trình sẽ theo flow TopLevelExceptionFilter còn nếu chương trình đang bị debug thì sẽ theo flow bên dưới.
 
 -> Về cơ bản đây là hàm chống chúng ta debug , khi bật thử debug thì chương trình dừng ngay tại địa chỉ 0x00D815EB cùng signal "không thể chia cho không":
 
